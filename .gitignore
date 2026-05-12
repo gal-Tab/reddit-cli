@@ -17,3 +17,4 @@ workflow-verify-report.json
 .idea/
 .vscode/
 *.swp
+/reddit-pp-cli
