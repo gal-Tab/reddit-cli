@@ -20,7 +20,7 @@ func newUserCommentsCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "comments <username>",
 		Short: "Comments by this user",
-		Example: "  reddit-pp-cli user comments example-resource",
+		Example: "  reddit-cli user comments example-resource",
 		Annotations: map[string]string{"pp:endpoint": "user.comments", "pp:method": "GET", "pp:path": "/user/{username}/comments.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

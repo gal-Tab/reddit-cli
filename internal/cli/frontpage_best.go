@@ -19,7 +19,7 @@ func newFrontpageBestCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "best",
 		Short: "Get the Reddit best listing",
-		Example: "  reddit-pp-cli frontpage best",
+		Example: "  reddit-cli frontpage best",
 		Annotations: map[string]string{"pp:endpoint": "frontpage.best", "pp:method": "GET", "pp:path": "/best.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			c, err := flags.newClient()

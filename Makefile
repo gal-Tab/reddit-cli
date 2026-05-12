@@ -1,7 +1,7 @@
 .PHONY: build test lint install clean
 
 build:
-	go build -o bin/reddit-pp-cli ./cmd/reddit-pp-cli
+	go build -o bin/reddit-cli ./cmd/reddit-cli
 
 test:
 	go test ./...
@@ -10,15 +10,15 @@ lint:
 	golangci-lint run
 
 install:
-	go install ./cmd/reddit-pp-cli
+	go install ./cmd/reddit-cli
 
 clean:
 	rm -rf bin/
 
 build-mcp:
-	go build -o bin/reddit-pp-mcp ./cmd/reddit-pp-mcp
+	go build -o bin/reddit-cli-mcp ./cmd/reddit-cli-mcp
 
 install-mcp:
-	go install ./cmd/reddit-pp-mcp
+	go install ./cmd/reddit-cli-mcp
 
 build-all: build build-mcp

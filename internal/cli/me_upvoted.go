@@ -18,7 +18,7 @@ func newMeUpvotedCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "upvoted <username>",
 		Short: "Posts the user has upvoted (cookie mode only)",
-		Example: "  reddit-pp-cli me upvoted example-resource",
+		Example: "  reddit-cli me upvoted example-resource",
 		Annotations: map[string]string{"pp:endpoint": "me.upvoted", "pp:method": "GET", "pp:path": "/user/{username}/upvoted.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

@@ -9,7 +9,7 @@ import (
 	"os"
 	"sort"
 
-	"reddit-pp-cli/internal/store"
+	"github.com/gal-Tab/reddit-cli/internal/store"
 	"github.com/spf13/cobra"
 )
 
@@ -26,21 +26,21 @@ func newAnalyticsCmd(flags *rootFlags) *cobra.Command {
 		Long: `Analyze locally synced data with count, group-by, and summary operations.
 Data must be synced first with the sync command.`,
 		Example: `  # Count records by type
-  reddit-pp-cli analytics --type messages
+  reddit-cli analytics --type messages
 
   # Group by a field
-  reddit-pp-cli analytics --type messages --group-by author_id
+  reddit-cli analytics --type messages --group-by author_id
 
   # Top 10 most frequent values
-  reddit-pp-cli analytics --type messages --group-by channel_id --limit 10 --json`,
+  reddit-cli analytics --type messages --group-by channel_id --limit 10 --json`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if dbPath == "" {
-				dbPath = defaultDBPath("reddit-pp-cli")
+				dbPath = defaultDBPath("reddit-cli")
 			}
 
 			db, err := store.OpenWithContext(cmd.Context(), dbPath)
 			if err != nil {
-				return fmt.Errorf("opening local database: %w\nRun 'reddit-pp-cli sync' first.", err)
+				return fmt.Errorf("opening local database: %w\nRun 'reddit-cli sync' first.", err)
 			}
 			defer db.Close()
 

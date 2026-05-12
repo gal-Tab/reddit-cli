@@ -14,7 +14,7 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
-	"reddit-pp-cli/internal/store"
+	"github.com/gal-Tab/reddit-cli/internal/store"
 	"github.com/spf13/cobra"
 )
 
@@ -58,22 +58,22 @@ Exit codes & warnings:
   --strict to exit non-zero on any per-resource failure. Exit is always
   non-zero when every selected resource failed, regardless of --strict.`,
 		Example: `  # Sync all resources
-  reddit-pp-cli sync
+  reddit-cli sync
 
   # Sync specific resources only
-  reddit-pp-cli sync --resources channels,messages
+  reddit-cli sync --resources channels,messages
 
   # Full resync (ignore previous checkpoint)
-  reddit-pp-cli sync --full
+  reddit-cli sync --full
 
   # Incremental sync: only records from the last 7 days
-  reddit-pp-cli sync --since 7d
+  reddit-cli sync --since 7d
 
   # Parallel sync with 8 workers
-  reddit-pp-cli sync --concurrency 8
+  reddit-cli sync --concurrency 8
 
   # Latest-only: refresh head of each resource, no historical backfill
-  reddit-pp-cli sync --latest-only`,
+  reddit-cli sync --latest-only`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			c, err := flags.newClient()
 			if err != nil {
@@ -82,7 +82,7 @@ Exit codes & warnings:
 			c.NoCache = true
 
 			if dbPath == "" {
-				dbPath = defaultDBPath("reddit-pp-cli")
+				dbPath = defaultDBPath("reddit-cli")
 			}
 
 			db, err := store.OpenWithContext(cmd.Context(), dbPath)
@@ -252,7 +252,7 @@ Exit codes & warnings:
 	cmd.Flags().BoolVar(&full, "full", false, "Full resync (ignore previous checkpoint)")
 	cmd.Flags().StringVar(&since, "since", "", "Incremental sync duration (e.g. 7d, 24h, 1w, 30m)")
 	cmd.Flags().IntVar(&concurrency, "concurrency", 4, "Number of parallel sync workers")
-	cmd.Flags().StringVar(&dbPath, "db", "", "Database path (default: ~/.local/share/reddit-pp-cli/data.db)")
+	cmd.Flags().StringVar(&dbPath, "db", "", "Database path (default: ~/.local/share/reddit-cli/data.db)")
 	cmd.Flags().IntVar(&maxPages, "max-pages", 100, "Maximum pages to fetch per resource (0 = unlimited; cap-hit emits a sync_warning event)")
 	cmd.Flags().BoolVar(&latestOnly, "latest-only", false, "Refresh head of each resource only; clears resume cursor and caps pages at 1. Mutually exclusive with --since (--since wins).")
 	cmd.Flags().BoolVar(&strict, "strict", false, "Exit non-zero on any per-resource failure (default: only critical failures or all-resource failure exit non-zero).")

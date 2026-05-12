@@ -19,7 +19,7 @@ func newSubredditNewCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "new <subreddit>",
 		Short: "New listing for a subreddit",
-		Example: "  reddit-pp-cli subreddit new example-value",
+		Example: "  reddit-cli subreddit new example-value",
 		Annotations: map[string]string{"pp:endpoint": "subreddit.new", "pp:method": "GET", "pp:path": "/r/{subreddit}/new.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

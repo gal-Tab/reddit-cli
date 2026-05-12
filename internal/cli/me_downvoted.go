@@ -18,7 +18,7 @@ func newMeDownvotedCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "downvoted <username>",
 		Short: "Posts the user has downvoted (cookie mode only)",
-		Example: "  reddit-pp-cli me downvoted example-resource",
+		Example: "  reddit-cli me downvoted example-resource",
 		Annotations: map[string]string{"pp:endpoint": "me.downvoted", "pp:method": "GET", "pp:path": "/user/{username}/downvoted.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

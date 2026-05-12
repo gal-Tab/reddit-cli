@@ -35,7 +35,7 @@ func feedbackFilePath() (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("resolving home dir: %w", err)
 	}
-	dir := filepath.Join(home, ".reddit-pp-cli")
+	dir := filepath.Join(home, ".reddit-cli")
 	if err := os.MkdirAll(dir, 0o700); err != nil {
 		return "", fmt.Errorf("creating state dir: %w", err)
 	}
@@ -81,7 +81,7 @@ func postFeedback(url string, entry FeedbackEntry) error {
 		return fmt.Errorf("building feedback request: %w", err)
 	}
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("User-Agent", "reddit-pp-cli/feedback")
+	req.Header.Set("User-Agent", "reddit-cli/feedback")
 	client := &http.Client{Timeout: 15 * time.Second}
 	resp, err := client.Do(req)
 	if err != nil {
@@ -100,7 +100,7 @@ func newFeedbackCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "feedback [text]",
 		Short: "Record feedback about this CLI (local by default; upstream opt-in)",
-		Long: `Feedback is captured locally first at ~/.reddit-pp-cli/feedback.jsonl.
+		Long: `Feedback is captured locally first at ~/.reddit-cli/feedback.jsonl.
 When ` + "`REDDIT_FEEDBACK_ENDPOINT`" + ` is set and either --send is
 passed or ` + "`REDDIT_FEEDBACK_AUTO_SEND=true`" + `, the entry is
 POSTed as JSON after the local write.
@@ -131,7 +131,7 @@ maintainer sees it.`,
 
 			entry := FeedbackEntry{
 				Text:      text,
-				CLI:       "reddit-pp-cli",
+				CLI:       "reddit-cli",
 				Version:   version,
 				AgentID:   os.Getenv("AGENT_ID"),
 				Timestamp: time.Now().UTC(),
@@ -184,9 +184,9 @@ func newFeedbackListCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "list",
 		Short: "List recent feedback entries",
-		Example: `  reddit-pp-cli feedback list
-  reddit-pp-cli feedback list --limit 5
-  reddit-pp-cli feedback list --json`,
+		Example: `  reddit-cli feedback list
+  reddit-cli feedback list --limit 5
+  reddit-cli feedback list --json`,
 		RunE: func(cmd *cobra.Command, _ []string) error {
 			p, err := feedbackFilePath()
 			if err != nil {

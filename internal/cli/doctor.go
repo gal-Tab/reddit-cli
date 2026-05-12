@@ -14,9 +14,9 @@ import (
 	"strings"
 	"time"
 
-	"reddit-pp-cli/internal/client"
-	"reddit-pp-cli/internal/config"
-	"reddit-pp-cli/internal/store"
+	"github.com/gal-Tab/reddit-cli/internal/client"
+	"github.com/gal-Tab/reddit-cli/internal/config"
+	"github.com/gal-Tab/reddit-cli/internal/store"
 	"github.com/spf13/cobra"
 )
 
@@ -69,9 +69,9 @@ func newDoctorCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "doctor",
 		Short: "Check CLI health",
-		Example: `  reddit-pp-cli doctor
-  reddit-pp-cli doctor --json
-  reddit-pp-cli doctor --fail-on warn`,
+		Example: `  reddit-cli doctor
+  reddit-cli doctor --json
+  reddit-cli doctor --fail-on warn`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			report := map[string]any{}
 
@@ -91,7 +91,7 @@ func newDoctorCmd(flags *rootFlags) *cobra.Command {
 				header := cfg.AuthHeader()
 				if header == "" {
 					report["auth"] = "not configured"
-					report["auth_hint"] = "reddit-pp-cli auth login --chrome"
+					report["auth_hint"] = "reddit-cli auth login --chrome"
 				} else {
 					authConfigured = true
 					report["auth"] = "configured (browser session)"
@@ -179,7 +179,7 @@ func newDoctorCmd(flags *rootFlags) *cobra.Command {
 						authParams := map[string]string{}
 						authHeaders := map[string]string{}
 						authHeaders["Authorization"] = authHeader
-						authHeaders["User-Agent"] = "reddit-pp-cli"
+						authHeaders["User-Agent"] = "reddit-cli"
 						_, authErr := c.GetWithHeaders(verifyPath, authParams, authHeaders)
 						var authAPIErr *client.APIError
 						switch {
@@ -321,14 +321,14 @@ func doctorExitForFailOn(failOn string, report map[string]any) error {
 // because the alternative is no freshness story at all.
 func collectCacheReport(ctx context.Context, staleAfterSpec string) map[string]any {
 	report := map[string]any{}
-	dbPath := defaultDBPath("reddit-pp-cli")
+	dbPath := defaultDBPath("reddit-cli")
 	report["db_path"] = dbPath
 
 	fi, err := os.Stat(dbPath)
 	if err != nil {
 		if os.IsNotExist(err) {
 			report["status"] = "unknown"
-			report["hint"] = "Database not created yet; run 'reddit-pp-cli sync' to hydrate."
+			report["hint"] = "Database not created yet; run 'reddit-cli sync' to hydrate."
 			return report
 		}
 		report["status"] = "error"
@@ -361,7 +361,7 @@ func collectCacheReport(ctx context.Context, staleAfterSpec string) map[string]a
 		// sync_state may not exist on a fresh DB that has migrated but not
 		// yet had any sync runs — treat as unknown rather than error.
 		report["status"] = "unknown"
-		report["hint"] = "No sync state recorded; run 'reddit-pp-cli sync' to populate."
+		report["hint"] = "No sync state recorded; run 'reddit-cli sync' to populate."
 		return report
 	}
 	defer rows.Close()
@@ -401,13 +401,13 @@ func collectCacheReport(ctx context.Context, staleAfterSpec string) map[string]a
 	switch {
 	case !haveAny && len(resources) == 0:
 		report["status"] = "unknown"
-		report["hint"] = "sync_state is empty; run 'reddit-pp-cli sync' to hydrate."
+		report["hint"] = "sync_state is empty; run 'reddit-cli sync' to hydrate."
 	case fresh:
 		report["status"] = "fresh"
 	default:
 		report["status"] = "stale"
 		report["oldest_age"] = oldest.Round(time.Minute).String()
-		report["hint"] = "Some resources are older than stale_after; run 'reddit-pp-cli sync' to refresh."
+		report["hint"] = "Some resources are older than stale_after; run 'reddit-cli sync' to refresh."
 	}
 	return report
 }

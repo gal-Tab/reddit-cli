@@ -38,7 +38,7 @@ func Load(configPath string) (*Config, error) {
 	}
 	if path == "" {
 		home, _ := os.UserHomeDir()
-		path = filepath.Join(home, ".config", "reddit-pp-cli", "config.toml")
+		path = filepath.Join(home, ".config", "reddit-cli", "config.toml")
 	}
 	cfg.Path = path
 

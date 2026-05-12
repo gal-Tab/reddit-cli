@@ -16,7 +16,7 @@ func newSubredditRulesCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "rules <subreddit>",
 		Short: "Subreddit rules",
-		Example: "  reddit-pp-cli subreddit rules example-value",
+		Example: "  reddit-cli subreddit rules example-value",
 		Annotations: map[string]string{"pp:endpoint": "subreddit.rules", "pp:method": "GET", "pp:path": "/r/{subreddit}/about/rules.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

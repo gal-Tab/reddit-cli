@@ -20,7 +20,7 @@ func newSubredditHotCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "hot <subreddit>",
 		Short: "Hot listing for a subreddit",
-		Example: "  reddit-pp-cli subreddit hot example-value",
+		Example: "  reddit-cli subreddit hot example-value",
 		Annotations: map[string]string{"pp:endpoint": "subreddit.hot", "pp:method": "GET", "pp:path": "/r/{subreddit}/hot.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

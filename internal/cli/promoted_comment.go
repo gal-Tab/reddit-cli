@@ -17,7 +17,7 @@ func newCommentPromotedCmd(flags *rootFlags) *cobra.Command {
 		Use:   "comment <id>",
 		Short: "Look up a comment by its t1_ fullname",
 		Long:  "Shortcut for 'comment get'. Look up a comment by its t1_ fullname",
-		Example: "  reddit-pp-cli comment 550e8400-e29b-41d4-a716-446655440000",
+		Example: "  reddit-cli comment 550e8400-e29b-41d4-a716-446655440000",
 		Annotations: map[string]string{"pp:endpoint": "comment.get", "pp:method": "GET", "pp:path": "/api/info.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			c, err := flags.newClient()

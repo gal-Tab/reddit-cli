@@ -16,7 +16,7 @@ func newSubredditModeratorsCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "moderators <subreddit>",
 		Short: "Subreddit moderator list",
-		Example: "  reddit-pp-cli subreddit moderators example-value",
+		Example: "  reddit-cli subreddit moderators example-value",
 		Annotations: map[string]string{"pp:endpoint": "subreddit.moderators", "pp:method": "GET", "pp:path": "/r/{subreddit}/about/moderators.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

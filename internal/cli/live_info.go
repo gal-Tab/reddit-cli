@@ -16,7 +16,7 @@ func newLiveInfoCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "info <thread_id>",
 		Short: "Live thread metadata: title, description, state, viewer count",
-		Example: "  reddit-pp-cli live info 550e8400-e29b-41d4-a716-446655440000",
+		Example: "  reddit-cli live info 550e8400-e29b-41d4-a716-446655440000",
 		Annotations: map[string]string{"pp:endpoint": "live.info", "pp:method": "GET", "pp:path": "/live/{thread_id}/about.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

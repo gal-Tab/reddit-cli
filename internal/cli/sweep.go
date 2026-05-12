@@ -10,7 +10,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"reddit-pp-cli/internal/store"
+	"github.com/gal-Tab/reddit-cli/internal/store"
 )
 
 func newSweepCmd(flags *rootFlags) *cobra.Command {
@@ -34,8 +34,8 @@ Use --since to bound the time window (default 24h).
 Use --min-score to filter low-signal results.
 `, "\n"),
 		Example: strings.Trim(`
-  reddit-pp-cli sweep 'rust async' --subs golang,rust,programming --since 24h --min-score 50 --json
-  reddit-pp-cli sweep antitrust --subs technology,law,politics --since 7d --limit 20
+  reddit-cli sweep 'rust async' --subs golang,rust,programming --since 24h --min-score 50 --json
+  reddit-cli sweep antitrust --subs technology,law,politics --since 7d --limit 20
 `, "\n"),
 		Annotations: map[string]string{"mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -56,7 +56,7 @@ Use --min-score to filter low-signal results.
 				return nil
 			}
 			if dbPath == "" {
-				dbPath = defaultDBPath("reddit-pp-cli")
+				dbPath = defaultDBPath("reddit-cli")
 			}
 			db, err := store.OpenWithContext(cmd.Context(), dbPath)
 			if err != nil {

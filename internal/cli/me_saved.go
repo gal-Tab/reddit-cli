@@ -18,7 +18,7 @@ func newMeSavedCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "saved <username>",
 		Short: "Posts and comments the user has saved (cookie mode only)",
-		Example: "  reddit-pp-cli me saved example-resource",
+		Example: "  reddit-cli me saved example-resource",
 		Annotations: map[string]string{"pp:endpoint": "me.saved", "pp:method": "GET", "pp:path": "/user/{username}/saved.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

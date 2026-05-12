@@ -16,7 +16,7 @@ func newUserTrophiesCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "trophies <username>",
 		Short: "Trophies awarded to this user",
-		Example: "  reddit-pp-cli user trophies example-resource",
+		Example: "  reddit-cli user trophies example-resource",
 		Annotations: map[string]string{"pp:endpoint": "user.trophies", "pp:method": "GET", "pp:path": "/user/{username}/trophies.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

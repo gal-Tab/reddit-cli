@@ -14,12 +14,12 @@ import (
 
 	mcplib "github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
-	"reddit-pp-cli/internal/cli"
-	"reddit-pp-cli/internal/cliutil"
-	"reddit-pp-cli/internal/client"
-	"reddit-pp-cli/internal/config"
-	"reddit-pp-cli/internal/mcp/cobratree"
-	"reddit-pp-cli/internal/store"
+	"github.com/gal-Tab/reddit-cli/internal/cli"
+	"github.com/gal-Tab/reddit-cli/internal/cliutil"
+	"github.com/gal-Tab/reddit-cli/internal/client"
+	"github.com/gal-Tab/reddit-cli/internal/config"
+	"github.com/gal-Tab/reddit-cli/internal/mcp/cobratree"
+	"github.com/gal-Tab/reddit-cli/internal/store"
 )
 
 // RegisterTools registers all API operations as MCP tools.
@@ -540,15 +540,15 @@ func makeAPIHandler(method, pathTemplate string, bindings []mcpParamBinding, pos
 			case strings.Contains(msg, "HTTP 400") && cliutil.LooksLikeAuthError(msg):
 				return mcplib.NewToolResultError("authentication error: " + cliutil.SanitizeErrorBody(msg) +
 					"\nhint: the API rejected the request — this usually means auth is missing or invalid." +
-					"\n      Run 'reddit-pp-cli doctor' to check auth status."), nil
+					"\n      Run 'reddit-cli doctor' to check auth status."), nil
 			case strings.Contains(msg, "HTTP 401"):
 				return mcplib.NewToolResultError("authentication failed: " + cliutil.SanitizeErrorBody(msg) +
 					"\nhint: check your API credentials." +
-					"\n      Run 'reddit-pp-cli doctor' to check auth status."), nil
+					"\n      Run 'reddit-cli doctor' to check auth status."), nil
 			case strings.Contains(msg, "HTTP 403"):
 				return mcplib.NewToolResultError("permission denied: " + cliutil.SanitizeErrorBody(msg) +
 					"\nhint: your credentials are valid but lack access to this resource." +
-					"\n      Run 'reddit-pp-cli doctor' to check auth status."), nil
+					"\n      Run 'reddit-cli doctor' to check auth status."), nil
 			case strings.Contains(msg, "HTTP 404"):
 				if method == "DELETE" {
 					return mcplib.NewToolResultText("already deleted (no-op)"), nil
@@ -582,7 +582,7 @@ func makeAPIHandler(method, pathTemplate string, bindings []mcpParamBinding, pos
 
 func newMCPClient() (*client.Client, error) {
 	home, _ := os.UserHomeDir()
-	cfgPath := filepath.Join(home, ".config", "reddit-pp-cli", "config.toml")
+	cfgPath := filepath.Join(home, ".config", "reddit-cli", "config.toml")
 	cfg, err := config.Load(cfgPath)
 	if err != nil {
 		return nil, fmt.Errorf("loading config: %w", err)
@@ -599,7 +599,7 @@ func newMCPClient() (*client.Client, error) {
 
 func dbPath() string {
 	home, _ := os.UserHomeDir()
-	return filepath.Join(home, ".local", "share", "reddit-pp-cli", "data.db")
+	return filepath.Join(home, ".local", "share", "reddit-cli", "data.db")
 }
 // Note: MCP tools use their own dbPath() because they are in a separate package (main, not cli).
 // The CLI's defaultDBPath() in the cli package uses the same canonical path.
@@ -708,7 +708,7 @@ func handleContext(_ context.Context, _ mcplib.CallToolRequest) (*mcplib.CallToo
 		"archetype":   "content",
 		"tool_count":  33,
 		// tool_surface tells agents which surface a capability lives on.
-		"tool_surface": "MCP exposes typed endpoint tools plus a runtime mirror of user-facing CLI commands. Endpoint tools keep typed schemas; command-mirror tools shell out to the companion reddit-pp-cli binary.",
+		"tool_surface": "MCP exposes typed endpoint tools plus a runtime mirror of user-facing CLI commands. Endpoint tools keep typed schemas; command-mirror tools shell out to the companion reddit-cli binary.",
 		"auth": map[string]any{
 			"type": "cookie",
 		},

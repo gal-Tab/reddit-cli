@@ -1,6 +1,6 @@
 # Compiled binaries (rebuild via `make build` / `make install`)
-/reddit-pp-cli
-/reddit-pp-mcp
+/reddit-cli
+/reddit-cli-mcp
 /bin/
 
 # Local artifacts from the most recent run; not source of truth

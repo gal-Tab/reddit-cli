@@ -13,7 +13,7 @@ import (
 	"fmt"
 	"strings"
 
-	"reddit-pp-cli/internal/store"
+	"github.com/gal-Tab/reddit-cli/internal/store"
 )
 
 // redditChild is one item from a Listing's children array. Reddit wraps

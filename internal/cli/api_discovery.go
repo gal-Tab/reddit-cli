@@ -25,10 +25,10 @@ agents that need full API coverage.
 Run 'api' with no arguments to list all interfaces.
 Run 'api <interface>' to see that interface's methods.`,
 		Example: `  # List all available interfaces
-  reddit-pp-cli api
+  reddit-cli api
 
   # Show methods for a specific interface
-  reddit-pp-cli api <interface-name>`,
+  reddit-cli api <interface-name>`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			root := cmd.Root()
 

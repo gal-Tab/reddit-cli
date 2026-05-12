@@ -10,7 +10,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"reddit-pp-cli/internal/store"
+	"github.com/gal-Tab/reddit-cli/internal/store"
 )
 
 func newControversialNowCmd(flags *rootFlags) *cobra.Command {
@@ -31,8 +31,8 @@ Reads from the local store. Run watchlist refresh, sync, or a subreddit
 listing first to populate.
 `, "\n"),
 		Example: strings.Trim(`
-  reddit-pp-cli controversial-now politics --min-ratio 0.5 --since 24h --limit 10 --json
-  reddit-pp-cli controversial-now technology --min-ratio 1.0 --since 6h
+  reddit-cli controversial-now politics --min-ratio 0.5 --since 24h --limit 10 --json
+  reddit-cli controversial-now technology --min-ratio 1.0 --since 6h
 `, "\n"),
 		Annotations: map[string]string{"mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -49,7 +49,7 @@ listing first to populate.
 				return nil
 			}
 			if dbPath == "" {
-				dbPath = defaultDBPath("reddit-pp-cli")
+				dbPath = defaultDBPath("reddit-cli")
 			}
 			db, err := store.OpenWithContext(cmd.Context(), dbPath)
 			if err != nil {

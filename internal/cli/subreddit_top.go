@@ -19,7 +19,7 @@ func newSubredditTopCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "top <subreddit>",
 		Short: "Top listing for a subreddit; --t selects timeframe",
-		Example: "  reddit-pp-cli subreddit top example-value",
+		Example: "  reddit-cli subreddit top example-value",
 		Annotations: map[string]string{"pp:endpoint": "subreddit.top", "pp:method": "GET", "pp:path": "/r/{subreddit}/top.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

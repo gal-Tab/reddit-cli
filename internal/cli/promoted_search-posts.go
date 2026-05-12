@@ -23,7 +23,7 @@ func newSearchPostsPromotedCmd(flags *rootFlags) *cobra.Command {
 		Use:   "search-posts <q>",
 		Short: "Search posts across all subreddits",
 		Long:  "Shortcut for 'search_posts get'. Search posts across all subreddits",
-		Example: "  reddit-pp-cli search-posts example-value",
+		Example: "  reddit-cli search-posts example-value",
 		Annotations: map[string]string{"pp:endpoint": "search_posts.get", "pp:method": "GET", "pp:path": "/search.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			c, err := flags.newClient()

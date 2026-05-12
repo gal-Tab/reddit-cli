@@ -1,34 +1,34 @@
 # Reddit Printed CLI Agent Guide
 
-This directory is a generated `reddit-pp-cli` printed CLI. It was produced by [CLI Printing Press](https://github.com/mvanhorn/cli-printing-press), so treat systemic fixes as upstream Printing Press fixes first. Keep local edits narrow and document why a generated-tree patch belongs here.
+This directory is a generated `reddit-cli` printed CLI. It was produced by [CLI Printing Press](https://github.com/mvanhorn/cli-printing-press), so treat systemic fixes as upstream Printing Press fixes first. Keep local edits narrow and document why a generated-tree patch belongs here.
 
 ## Local Operating Contract
 
 Start by asking the generated CLI for current runtime truth:
 
 ```bash
-reddit-pp-cli doctor --json
-reddit-pp-cli agent-context --pretty
+reddit-cli doctor --json
+reddit-cli agent-context --pretty
 ```
 
 Use runtime discovery instead of relying on a copied command list:
 
 ```bash
-reddit-pp-cli which "<capability>" --json
-reddit-pp-cli <command> --help
+reddit-cli which "<capability>" --json
+reddit-cli <command> --help
 ```
 
 Add `--agent` to command invocations for JSON, compact output, non-interactive defaults, no color, and confirmation-safe scripting:
 
 ```bash
-reddit-pp-cli <command> --agent
+reddit-cli <command> --agent
 ```
 
 Before running an unfamiliar command that may mutate remote state, inspect its help and prefer a dry run:
 
 ```bash
-reddit-pp-cli <command> --help
-reddit-pp-cli <command> --dry-run --agent
+reddit-cli <command> --help
+reddit-cli <command> --dry-run --agent
 ```
 
 Use `--yes --no-input` only after the target, arguments, and side effects are clear.

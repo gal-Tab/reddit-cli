@@ -144,10 +144,10 @@ func newWhichCmd(flags *rootFlags) *cobra.Command {
 Exit codes:
   0  at least one match found
   2  no confident match - the query did not score against any indexed capability; fall back to '--help' or 'search' if this CLI has one`,
-		Example: `  reddit-pp-cli which "stale tickets"
-  reddit-pp-cli which "bottleneck"
-  reddit-pp-cli which --limit 1 "send message"
-  reddit-pp-cli which                                # list the full capability index`,
+		Example: `  reddit-cli which "stale tickets"
+  reddit-cli which "bottleneck"
+  reddit-cli which --limit 1 "send message"
+  reddit-cli which                                # list the full capability index`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(whichIndex) == 0 {
 				return usageErr(fmt.Errorf("this CLI has no curated capability index; run '--help' to see every command"))

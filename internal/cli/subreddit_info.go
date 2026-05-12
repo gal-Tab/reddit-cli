@@ -16,7 +16,7 @@ func newSubredditInfoCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "info <subreddit>",
 		Short: "Subreddit metadata: subscribers, description, created, over_18, type",
-		Example: "  reddit-pp-cli subreddit info example-value",
+		Example: "  reddit-cli subreddit info example-value",
 		Annotations: map[string]string{"pp:endpoint": "subreddit.info", "pp:method": "GET", "pp:path": "/r/{subreddit}/about.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

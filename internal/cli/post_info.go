@@ -17,7 +17,7 @@ func newPostInfoCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "info",
 		Short: "Look up posts by ID(s) without their comment trees",
-		Example: "  reddit-pp-cli post info --id 550e8400-e29b-41d4-a716-446655440000",
+		Example: "  reddit-cli post info --id 550e8400-e29b-41d4-a716-446655440000",
 		Annotations: map[string]string{"pp:endpoint": "post.info", "pp:method": "GET", "pp:path": "/api/info.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !cmd.Flags().Changed("id") && !flags.dryRun {

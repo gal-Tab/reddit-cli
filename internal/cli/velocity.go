@@ -8,7 +8,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"reddit-pp-cli/internal/store"
+	"github.com/gal-Tab/reddit-cli/internal/store"
 )
 
 func newVelocityCmd(flags *rootFlags) *cobra.Command {
@@ -33,8 +33,8 @@ created_utc instead so the command still returns useful results on the
 first run.
 `, "\n"),
 		Example: strings.Trim(`
-  reddit-pp-cli velocity wallstreetbets --window 1h --min-score 100 --json
-  reddit-pp-cli velocity golang --window 30m --limit 5
+  reddit-cli velocity wallstreetbets --window 1h --min-score 100 --json
+  reddit-cli velocity golang --window 30m --limit 5
 `, "\n"),
 		Annotations: map[string]string{"mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -52,7 +52,7 @@ first run.
 				return nil
 			}
 			if dbPath == "" {
-				dbPath = defaultDBPath("reddit-pp-cli")
+				dbPath = defaultDBPath("reddit-cli")
 			}
 			db, err := store.OpenWithContext(cmd.Context(), dbPath)
 			if err != nil {
@@ -82,7 +82,7 @@ first run.
 	cmd.Flags().StringVar(&windowStr, "window", "1h", "Velocity window (e.g. 30m, 1h, 6h, 1d, 1w)")
 	cmd.Flags().IntVar(&minScore, "min-score", 0, "Minimum current score to include")
 	cmd.Flags().IntVar(&limit, "limit", 25, "Max results to return")
-	cmd.Flags().StringVar(&dbPath, "db", "", "Database path (default: ~/.local/share/reddit-pp-cli/data.db)")
+	cmd.Flags().StringVar(&dbPath, "db", "", "Database path (default: ~/.local/share/reddit-cli/data.db)")
 	return cmd
 }
 

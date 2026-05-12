@@ -20,7 +20,7 @@ func newPostGetCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "get <post_id>",
 		Short: "Fetch a post and its full comment tree (flattened with depth+score in JSON output)",
-		Example: "  reddit-pp-cli post get 550e8400-e29b-41d4-a716-446655440000",
+		Example: "  reddit-cli post get 550e8400-e29b-41d4-a716-446655440000",
 		Annotations: map[string]string{"pp:endpoint": "post.get", "pp:method": "GET", "pp:path": "/comments/{post_id}.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

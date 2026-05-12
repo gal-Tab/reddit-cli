@@ -9,7 +9,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"reddit-pp-cli/internal/store"
+	"github.com/gal-Tab/reddit-cli/internal/store"
 )
 
 func newCascadeCmd(flags *rootFlags) *cobra.Command {
@@ -33,8 +33,8 @@ watchlist refresh — not auto-populated standalone. Run those first if
 the cascade is empty.
 `, "\n"),
 		Example: strings.Trim(`
-  reddit-pp-cli cascade abc123 --depth 3 --json
-  reddit-pp-cli cascade abc123 --depth 5 --graph
+  reddit-cli cascade abc123 --depth 3 --json
+  reddit-cli cascade abc123 --depth 5 --graph
 `, "\n"),
 		Annotations: map[string]string{"mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -47,7 +47,7 @@ the cascade is empty.
 				return nil
 			}
 			if dbPath == "" {
-				dbPath = defaultDBPath("reddit-pp-cli")
+				dbPath = defaultDBPath("reddit-cli")
 			}
 			db, err := store.OpenWithContext(cmd.Context(), dbPath)
 			if err != nil {

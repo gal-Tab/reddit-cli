@@ -18,7 +18,7 @@ func newSubredditControversialCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "controversial <subreddit>",
 		Short: "Controversial listing for a subreddit; --t selects timeframe",
-		Example: "  reddit-pp-cli subreddit controversial example-value",
+		Example: "  reddit-cli subreddit controversial example-value",
 		Annotations: map[string]string{"pp:endpoint": "subreddit.controversial", "pp:method": "GET", "pp:path": "/r/{subreddit}/controversial.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

@@ -17,7 +17,7 @@ import (
 	"sort"
 	"strings"
 	"time"
-	"reddit-pp-cli/internal/config"
+	"github.com/gal-Tab/reddit-cli/internal/config"
 	"github.com/spf13/cobra"
 )
 
@@ -56,14 +56,14 @@ Requires a cookie extraction tool (pycookiecheat, cookies, or cookie-scoop-cli).
 If you have multiple Chrome profiles, pycookiecheat and cookie-scoop-cli can
 auto-detect which profile is logged in. Use --profile to select a specific
 profile by name when the installed backend supports it.`,
-		Example: `  reddit-pp-cli auth login --chrome
-  reddit-pp-cli auth login --browser
-  reddit-pp-cli auth login --chrome --profile "Work"`,
+		Example: `  reddit-cli auth login --chrome
+  reddit-cli auth login --browser
+  reddit-cli auth login --chrome --profile "Work"`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !browserFlag {
 				fmt.Fprintln(cmd.OutOrStdout(), "Use --chrome or --browser to authenticate from your browser session:")
-				fmt.Fprintf(cmd.OutOrStdout(), "  reddit-pp-cli auth login --chrome\n")
-				fmt.Fprintf(cmd.OutOrStdout(), "  reddit-pp-cli auth login --browser\n")
+				fmt.Fprintf(cmd.OutOrStdout(), "  reddit-cli auth login --chrome\n")
+				fmt.Fprintf(cmd.OutOrStdout(), "  reddit-cli auth login --browser\n")
 				return nil
 			}
 
@@ -98,7 +98,7 @@ profile by name when the installed backend supports it.`,
 					fmt.Fprintln(w, "Log in to your account:")
 					fmt.Fprintf(w, "\n  %s\n\n", loginURL)
 					fmt.Fprintln(w, "Then run this command again:")
-					fmt.Fprintf(w, "\n  reddit-pp-cli auth login --chrome\n")
+					fmt.Fprintf(w, "\n  reddit-cli auth login --chrome\n")
 					return authErr(fmt.Errorf("not logged in to %s", domain))
 				}
 			}
@@ -153,7 +153,7 @@ func newAuthStatusCmd(flags *rootFlags) *cobra.Command {
 	return &cobra.Command{
 		Use:     "status",
 		Short:   "Show authentication status",
-		Example: "  reddit-pp-cli auth status",
+		Example: "  reddit-cli auth status",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cfg, err := config.Load(flags.configPath)
 			if err != nil {
@@ -166,7 +166,7 @@ func newAuthStatusCmd(flags *rootFlags) *cobra.Command {
 				fmt.Fprintln(w, red("Not authenticated"))
 				fmt.Fprintln(w, "")
 				fmt.Fprintln(w, "Log in from your browser session:")
-				fmt.Fprintf(w, "  reddit-pp-cli auth login --chrome\n")
+				fmt.Fprintf(w, "  reddit-cli auth login --chrome\n")
 				return authErr(fmt.Errorf("no credentials configured"))
 			}
 
@@ -183,7 +183,7 @@ func newAuthLogoutCmd(flags *rootFlags) *cobra.Command {
 	return &cobra.Command{
 		Use:     "logout",
 		Short:   "Clear stored credentials",
-		Example: "  reddit-pp-cli auth logout",
+		Example: "  reddit-cli auth logout",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cfg, err := config.Load(flags.configPath)
 			if err != nil {

@@ -16,8 +16,8 @@ import (
 	"text/tabwriter"
 	"time"
 	"unicode"
-	"reddit-pp-cli/internal/cliutil"
-	"reddit-pp-cli/internal/client"
+	"github.com/gal-Tab/reddit-cli/internal/cliutil"
+	"github.com/gal-Tab/reddit-cli/internal/client"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )
@@ -230,15 +230,15 @@ func classifyAPIError(err error, flags *rootFlags) error {
 		return classified
 	case strings.Contains(msg, "HTTP 400") && cliutil.LooksLikeAuthError(msg):
 		return authErr(fmt.Errorf("%w\nhint: the API rejected the request — this usually means auth is missing or invalid."+
-			"\n      Run 'reddit-pp-cli doctor' to check auth status."+
+			"\n      Run 'reddit-cli doctor' to check auth status."+
 			"\n      Response: "+cliutil.SanitizeErrorBody(msg), err))
 	case strings.Contains(msg, "HTTP 401"):
 		return authErr(fmt.Errorf("%w\nhint: check your API credentials."+
-			"\n      Run 'reddit-pp-cli doctor' to check auth status.", err))
+			"\n      Run 'reddit-cli doctor' to check auth status.", err))
 	case strings.Contains(msg, "HTTP 403"):
 		return authErr(fmt.Errorf("%w\nhint: permission denied. Your credentials are valid but lack access to this resource."+
 			"\n      Check that your API key has the required permissions."+
-			"\n      Run 'reddit-pp-cli doctor' to check auth status.", err))
+			"\n      Run 'reddit-cli doctor' to check auth status.", err))
 	case strings.Contains(msg, "HTTP 404"):
 		return notFoundErr(fmt.Errorf("%w\nhint: resource not found. Run the 'list' command to see available items", err))
 	case strings.Contains(msg, "HTTP 429"):

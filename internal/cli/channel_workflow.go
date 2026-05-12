@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"time"
 
-	"reddit-pp-cli/internal/store"
+	"github.com/gal-Tab/reddit-cli/internal/store"
 	"github.com/spf13/cobra"
 )
 
@@ -35,10 +35,10 @@ func newWorkflowArchiveCmd(flags *rootFlags) *cobra.Command {
 local SQLite database. Supports incremental sync (only new data since last run)
 and full resync. After archiving, use 'search' for instant full-text search.`,
 		Example: `  # Archive all resources
-  reddit-pp-cli workflow archive
+  reddit-cli workflow archive
 
   # Full re-archive (ignore previous sync state)
-  reddit-pp-cli workflow archive --full`,
+  reddit-cli workflow archive --full`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			c, err := flags.newClient()
 			if err != nil {
@@ -47,7 +47,7 @@ and full resync. After archiving, use 'search' for instant full-text search.`,
 			c.NoCache = true
 
 			if dbPath == "" {
-				dbPath = defaultDBPath("reddit-pp-cli")
+				dbPath = defaultDBPath("reddit-cli")
 			}
 			s, err := store.OpenWithContext(cmd.Context(), dbPath)
 			if err != nil {
@@ -135,7 +135,7 @@ and full resync. After archiving, use 'search' for instant full-text search.`,
 		},
 	}
 
-	cmd.Flags().StringVar(&dbPath, "db", "", "Database path (default: ~/.local/share/reddit-pp-cli/data.db)")
+	cmd.Flags().StringVar(&dbPath, "db", "", "Database path (default: ~/.local/share/reddit-cli/data.db)")
 	cmd.Flags().BoolVar(&full, "full", false, "Full re-archive (ignore previous sync state)")
 
 	return cmd
@@ -149,13 +149,13 @@ func newWorkflowStatusCmd(flags *rootFlags) *cobra.Command {
 		Short:       "Show local archive status and sync state for all resources",
 		Annotations: map[string]string{"mcp:read-only": "true"},
 		Example: `  # Show archive status
-  reddit-pp-cli workflow status
+  reddit-cli workflow status
 
   # Show status as JSON
-  reddit-pp-cli workflow status --json`,
+  reddit-cli workflow status --json`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if dbPath == "" {
-				dbPath = defaultDBPath("reddit-pp-cli")
+				dbPath = defaultDBPath("reddit-cli")
 			}
 			s, err := store.OpenWithContext(cmd.Context(), dbPath)
 			if err != nil {

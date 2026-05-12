@@ -22,7 +22,7 @@ func newSubredditSearchCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "search <subreddit>",
 		Short: "Subreddit-scoped search",
-		Example: "  reddit-pp-cli subreddit search example-value --q example-value",
+		Example: "  reddit-cli subreddit search example-value --q example-value",
 		Annotations: map[string]string{"pp:endpoint": "subreddit.search", "pp:method": "GET", "pp:path": "/r/{subreddit}/search.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

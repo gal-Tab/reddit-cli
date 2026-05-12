@@ -9,7 +9,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"reddit-pp-cli/internal/store"
+	"github.com/gal-Tab/reddit-cli/internal/store"
 )
 
 func newPulseCmd(flags *rootFlags) *cobra.Command {
@@ -33,8 +33,8 @@ length immediately preceding it. Default is 7d (so 7d-vs-7d).
 Topic matches are case-insensitive substring on title + selftext.
 `, "\n"),
 		Example: strings.Trim(`
-  reddit-pp-cli pulse 'gpt-5' --subs ChatGPT,MachineLearning,OpenAI --vs-window 7d --json
-  reddit-pp-cli pulse antitrust --subs technology,law,politics --vs-window 24h
+  reddit-cli pulse 'gpt-5' --subs ChatGPT,MachineLearning,OpenAI --vs-window 7d --json
+  reddit-cli pulse antitrust --subs technology,law,politics --vs-window 24h
 `, "\n"),
 		Annotations: map[string]string{"mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -55,7 +55,7 @@ Topic matches are case-insensitive substring on title + selftext.
 				return nil
 			}
 			if dbPath == "" {
-				dbPath = defaultDBPath("reddit-pp-cli")
+				dbPath = defaultDBPath("reddit-cli")
 			}
 			db, err := store.OpenWithContext(cmd.Context(), dbPath)
 			if err != nil {

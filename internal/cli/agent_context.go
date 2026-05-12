@@ -116,7 +116,7 @@ func buildAgentContext(rootCmd *cobra.Command) agentContext {
 	return agentContext{
 		SchemaVersion: agentContextSchemaVersion,
 		CLI: agentContextCLI{
-			Name:        "reddit-pp-cli",
+			Name:        "reddit-cli",
 			Description: "Read-only Reddit CLI with an offline SQLite mirror, FTS5 search, and velocity-tracking commands.",
 			Version:     rootCmd.Version,
 		},

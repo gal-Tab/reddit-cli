@@ -20,7 +20,7 @@ func newUserPostsCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "posts <username>",
 		Short: "Posts submitted by this user",
-		Example: "  reddit-pp-cli user posts example-resource",
+		Example: "  reddit-cli user posts example-resource",
 		Annotations: map[string]string{"pp:endpoint": "user.posts", "pp:method": "GET", "pp:path": "/user/{username}/submitted.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

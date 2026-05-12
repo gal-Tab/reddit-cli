@@ -18,7 +18,7 @@ func newDiscoverSubredditsCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "subreddits",
 		Short: "Popular subreddits",
-		Example: "  reddit-pp-cli discover subreddits",
+		Example: "  reddit-cli discover subreddits",
 		Annotations: map[string]string{"pp:endpoint": "discover.subreddits", "pp:method": "GET", "pp:path": "/subreddits/popular.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			c, err := flags.newClient()

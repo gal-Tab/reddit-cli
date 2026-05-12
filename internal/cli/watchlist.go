@@ -10,7 +10,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"reddit-pp-cli/internal/store"
+	"github.com/gal-Tab/reddit-cli/internal/store"
 )
 
 func newWatchlistCmd(flags *rootFlags) *cobra.Command {
@@ -45,7 +45,7 @@ func newWatchlistAddCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "add <target>",
 		Short:   "Bookmark a subreddit (default) or a user (--user)",
-		Example: "  reddit-pp-cli watchlist add golang\n  reddit-pp-cli watchlist add spez --user",
+		Example: "  reddit-cli watchlist add golang\n  reddit-cli watchlist add spez --user",
 		Annotations: map[string]string{"mcp:read-only": "false"}, // mutates local state
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {
@@ -84,7 +84,7 @@ func newWatchlistRemoveCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "remove <target>",
 		Short:   "Remove a subreddit (default) or a user (--user) from the watchlist",
-		Example: "  reddit-pp-cli watchlist remove golang",
+		Example: "  reddit-cli watchlist remove golang",
 		Annotations: map[string]string{"mcp:read-only": "false"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {
@@ -121,7 +121,7 @@ func newWatchlistListCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "list",
 		Short:   "Show all watchlist entries with their last_synced_at",
-		Example: "  reddit-pp-cli watchlist list --json",
+		Example: "  reddit-cli watchlist list --json",
 		Annotations: map[string]string{"mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if dryRunOK(flags) {
@@ -153,7 +153,7 @@ func newWatchlistRefreshCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "refresh",
 		Short:   "Re-sync every watchlist entry (calls /r/<sub>/<sort>.json or /user/<u>/overview.json) and stamps last_synced_at",
-		Example: "  reddit-pp-cli watchlist refresh\n  reddit-pp-cli watchlist refresh --sort top --limit 100",
+		Example: "  reddit-cli watchlist refresh\n  reddit-cli watchlist refresh --sort top --limit 100",
 		Annotations: map[string]string{"mcp:read-only": "false"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if dryRunOK(flags) {
@@ -214,7 +214,7 @@ func newWatchlistDiffCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "diff",
 		Short:   "Posts created since each entry's last_synced_at, grouped by entry",
-		Example: "  reddit-pp-cli watchlist diff --json",
+		Example: "  reddit-cli watchlist diff --json",
 		Annotations: map[string]string{"mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if dryRunOK(flags) {
@@ -318,7 +318,7 @@ func computeWatchlistDiff(ctx context.Context, db *sql.DB, entries []store.Watch
 // every watchlist subcommand.
 func openWatchlistDB(ctx context.Context, dbPath string) (*store.Store, error) {
 	if dbPath == "" {
-		dbPath = defaultDBPath("reddit-pp-cli")
+		dbPath = defaultDBPath("reddit-cli")
 	}
 	db, err := store.OpenWithContext(ctx, dbPath)
 	if err != nil {

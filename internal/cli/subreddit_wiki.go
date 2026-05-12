@@ -16,7 +16,7 @@ func newSubredditWikiCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "wiki <subreddit> <page>",
 		Short: "Read a wiki page from a subreddit",
-		Example: "  reddit-pp-cli subreddit wiki example-value example-value",
+		Example: "  reddit-cli subreddit wiki example-value example-value",
 		Annotations: map[string]string{"pp:endpoint": "subreddit.wiki", "pp:method": "GET", "pp:path": "/r/{subreddit}/wiki/{page}.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

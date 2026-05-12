@@ -20,7 +20,7 @@ func newUserOverviewCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "overview <username>",
 		Short: "User overview: combined posts and comments in reverse-chrono",
-		Example: "  reddit-pp-cli user overview example-resource",
+		Example: "  reddit-cli user overview example-resource",
 		Annotations: map[string]string{"pp:endpoint": "user.overview", "pp:method": "GET", "pp:path": "/user/{username}/overview.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

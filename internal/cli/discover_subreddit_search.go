@@ -18,7 +18,7 @@ func newDiscoverSubredditSearchCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "subreddit-search <q>",
 		Short: "Search for subreddits by name or description",
-		Example: "  reddit-pp-cli discover subreddit-search example-value",
+		Example: "  reddit-cli discover subreddit-search example-value",
 		Annotations: map[string]string{"pp:endpoint": "discover.subreddit_search", "pp:method": "GET", "pp:path": "/subreddits/search.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

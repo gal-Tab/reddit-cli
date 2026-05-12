@@ -20,7 +20,7 @@ func newFrontpageGetCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "get",
 		Short: "Get the Reddit frontpage (anonymous = best-of; cookie = personalized)",
-		Example: "  reddit-pp-cli frontpage get",
+		Example: "  reddit-cli frontpage get",
 		Annotations: map[string]string{"pp:endpoint": "frontpage.get", "pp:method": "GET", "pp:path": "/.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			c, err := flags.newClient()

@@ -33,7 +33,7 @@ func profileStorePath() (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("resolving home dir: %w", err)
 	}
-	dir := filepath.Join(home, ".reddit-pp-cli")
+	dir := filepath.Join(home, ".reddit-cli")
 	if err := os.MkdirAll(dir, 0o700); err != nil {
 		return "", fmt.Errorf("creating state dir: %w", err)
 	}
@@ -173,8 +173,8 @@ entry is replaced.
 
 To avoid creating empty profiles, at least one non-default flag must be
 present (other than --profile and --config).`,
-		Example: `  reddit-pp-cli profile save my-defaults --json --compact
-  reddit-pp-cli profile save tonight-defaults --region US`,
+		Example: `  reddit-cli profile save my-defaults --json --compact
+  reddit-cli profile save tonight-defaults --region US`,
 		Args: cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			name := args[0]
@@ -217,8 +217,8 @@ func newProfileUseCmd(flags *rootFlags) *cobra.Command {
 	return &cobra.Command{
 		Use:   "use <name>",
 		Short: "Print the flag values a profile will apply (does not execute anything)",
-		Example: `  reddit-pp-cli profile use my-defaults
-  reddit-pp-cli profile use tonight-defaults --json`,
+		Example: `  reddit-cli profile use my-defaults
+  reddit-cli profile use tonight-defaults --json`,
 		Args: cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			p, err := GetProfile(args[0])
@@ -252,8 +252,8 @@ func newProfileListCmd(flags *rootFlags) *cobra.Command {
 	return &cobra.Command{
 		Use:   "list",
 		Short: "List saved profiles",
-		Example: `  reddit-pp-cli profile list
-  reddit-pp-cli profile list --json`,
+		Example: `  reddit-cli profile list
+  reddit-cli profile list --json`,
 		RunE: func(cmd *cobra.Command, _ []string) error {
 			s, err := loadProfileStore()
 			if err != nil {
@@ -291,8 +291,8 @@ func newProfileShowCmd(flags *rootFlags) *cobra.Command {
 	return &cobra.Command{
 		Use:   "show <name>",
 		Short: "Show a profile's values as JSON",
-		Example: `  reddit-pp-cli profile show my-defaults
-  reddit-pp-cli profile show tonight-defaults --json`,
+		Example: `  reddit-cli profile show my-defaults
+  reddit-cli profile show tonight-defaults --json`,
 		Args: cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			p, err := GetProfile(args[0])
@@ -311,8 +311,8 @@ func newProfileDeleteCmd(flags *rootFlags) *cobra.Command {
 	return &cobra.Command{
 		Use:   "delete <name>",
 		Short: "Remove a profile",
-		Example: `  reddit-pp-cli profile delete my-defaults --yes
-  reddit-pp-cli profile delete old-profile --yes --json`,
+		Example: `  reddit-cli profile delete my-defaults --yes
+  reddit-cli profile delete old-profile --yes --json`,
 		Args: cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			name := args[0]

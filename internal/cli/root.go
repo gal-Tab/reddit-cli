@@ -13,8 +13,8 @@ import (
 	"text/tabwriter"
 	"time"
 
-	"reddit-pp-cli/internal/client"
-	"reddit-pp-cli/internal/config"
+	"github.com/gal-Tab/reddit-cli/internal/client"
+	"github.com/gal-Tab/reddit-cli/internal/config"
 	"github.com/spf13/cobra"
 )
 
@@ -81,7 +81,7 @@ func Execute() error {
 
 func newRootCmd(flags *rootFlags) *cobra.Command {
 	rootCmd := &cobra.Command{
-		Use:   "reddit-pp-cli",
+		Use:   "reddit-cli",
 		Short: `Reddit CLI — Read-only Reddit CLI with an offline SQLite mirror, FTS5 search, and velocity-tracking commands.`,
 		Long: `Reddit CLI — Read-only Reddit CLI with an offline SQLite mirror, FTS5 search, and velocity-tracking commands.
 
@@ -95,12 +95,12 @@ Highlights (not in the official API docs):
   • watchlist   A named bag of subreddits and users; one command refreshes them all and the diff sub-command reports what's new and what's rising since the last sync, grouped by entry.
 
 Agent mode: add --agent to any command for JSON output + non-interactive mode.
-Health check: run 'reddit-pp-cli doctor' to verify auth and connectivity.
+Health check: run 'reddit-cli doctor' to verify auth and connectivity.
 See README.md or the bundled SKILL.md for recipes.`,
 		SilenceUsage: true,
 		Version:      version,
 	}
-	rootCmd.SetVersionTemplate("reddit-pp-cli {{ .Version }}\n")
+	rootCmd.SetVersionTemplate("reddit-cli {{ .Version }}\n")
 
 	rootCmd.PersistentFlags().BoolVar(&flags.asJSON, "json", false, "Output as JSON")
 	rootCmd.PersistentFlags().BoolVar(&flags.compact, "compact", false, "Return only key fields (id, name, status, timestamps) for minimal token usage")
@@ -119,7 +119,7 @@ See README.md or the bundled SKILL.md for recipes.`,
 	rootCmd.PersistentFlags().BoolVar(&humanFriendly, "human-friendly", false, "Enable colored output and rich formatting")
 	rootCmd.PersistentFlags().BoolVar(&flags.agent, "agent", false, "Set all agent-friendly defaults (--json --compact --no-input --no-color --yes)")
 	rootCmd.PersistentFlags().StringVar(&flags.dataSource, "data-source", "auto", "Data source for read commands: auto (live with local fallback), live (API only), local (synced data only)")
-	rootCmd.PersistentFlags().StringVar(&flags.profileName, "profile", "", "Apply values from a saved profile (see 'reddit-pp-cli profile list')")
+	rootCmd.PersistentFlags().StringVar(&flags.profileName, "profile", "", "Apply values from a saved profile (see 'reddit-cli profile list')")
 	rootCmd.PersistentFlags().StringVar(&flags.deliverSpec, "deliver", "", "Route output to a sink: stdout (default), file:<path>, webhook:<url>")
 	rootCmd.PersistentFlags().Float64Var(&flags.rateLimit, "rate-limit", 0, "Max requests per second (0 to disable)")
 
@@ -267,7 +267,7 @@ func newVersionCliCmd() *cobra.Command {
 		Use:   "version",
 		Short: "Print version",
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Printf("reddit-pp-cli %s\n", version)
+			fmt.Printf("reddit-cli %s\n", version)
 		},
 	}
 }

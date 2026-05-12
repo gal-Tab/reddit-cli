@@ -18,7 +18,7 @@ func newMeSubscriptionsCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "subscriptions",
 		Short: "Subreddits the authenticated user is subscribed to (cookie mode only)",
-		Example: "  reddit-pp-cli me subscriptions",
+		Example: "  reddit-cli me subscriptions",
 		Annotations: map[string]string{"pp:endpoint": "me.subscriptions", "pp:method": "GET", "pp:path": "/subreddits/mine/subscriber.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			c, err := flags.newClient()

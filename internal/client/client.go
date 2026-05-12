@@ -18,8 +18,8 @@ import (
 	"sort"
 	"strings"
 	"time"
-	"reddit-pp-cli/internal/cliutil"
-	"reddit-pp-cli/internal/config"
+	"github.com/gal-Tab/reddit-cli/internal/cliutil"
+	"github.com/gal-Tab/reddit-cli/internal/config"
 )
 
 type Client struct {
@@ -52,7 +52,7 @@ func newHTTPClient(timeout time.Duration, jar http.CookieJar) *http.Client {
 
 func New(cfg *config.Config, timeout time.Duration, rateLimit float64) *Client {
 	homeDir, _ := os.UserHomeDir()
-	cacheDir := filepath.Join(homeDir, ".cache", "reddit-pp-cli")
+	cacheDir := filepath.Join(homeDir, ".cache", "reddit-cli")
 	httpClient := newHTTPClient(timeout, nil)
 	return &Client{
 		BaseURL:    strings.TrimRight(cfg.BaseURL, "/"),
@@ -247,7 +247,7 @@ func (c *Client) do(method, path string, params map[string]string, body any, hea
 			req.Header.Set(k, v)
 		}
 		if req.Header.Get("User-Agent") == "" {
-			req.Header.Set("User-Agent", "reddit-pp-cli/0.1.0")
+			req.Header.Set("User-Agent", "reddit-cli/0.1.0")
 		}
 
 		resp, err := c.HTTPClient.Do(req)

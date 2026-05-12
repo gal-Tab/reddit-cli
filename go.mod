@@ -1,4 +1,4 @@
-module reddit-pp-cli
+module github.com/gal-Tab/reddit-cli
 
 go 1.26.3
 

@@ -16,7 +16,7 @@ func newUserAboutCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "about <username>",
 		Short: "User metadata: karma, account age, mod status, gold status",
-		Example: "  reddit-pp-cli user about example-resource",
+		Example: "  reddit-cli user about example-resource",
 		Annotations: map[string]string{"pp:endpoint": "user.about", "pp:method": "GET", "pp:path": "/user/{username}/about.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

@@ -10,7 +10,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"reddit-pp-cli/internal/store"
+	"github.com/gal-Tab/reddit-cli/internal/store"
 )
 
 // newUserActivityCmd is registered as a child of the existing `user`
@@ -36,8 +36,8 @@ older history clipped — the report will warn when the cursor walk
 stopped due to the cap rather than reaching the cutoff.
 `, "\n"),
 		Example: strings.Trim(`
-  reddit-pp-cli user activity spez --since 30d --group-by sub --json
-  reddit-pp-cli user activity gallowboob --since 7d --group-by sub
+  reddit-cli user activity spez --since 30d --group-by sub --json
+  reddit-cli user activity gallowboob --since 7d --group-by sub
 `, "\n"),
 		Annotations: map[string]string{"mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -54,7 +54,7 @@ stopped due to the cap rather than reaching the cutoff.
 				return nil
 			}
 			if dbPath == "" {
-				dbPath = defaultDBPath("reddit-pp-cli")
+				dbPath = defaultDBPath("reddit-cli")
 			}
 			db, err := store.OpenWithContext(cmd.Context(), dbPath)
 			if err != nil {

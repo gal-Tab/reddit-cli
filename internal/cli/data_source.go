@@ -13,8 +13,8 @@ import (
 	"strings"
 	"time"
 
-	"reddit-pp-cli/internal/client"
-	"reddit-pp-cli/internal/store"
+	"github.com/gal-Tab/reddit-cli/internal/client"
+	"github.com/gal-Tab/reddit-cli/internal/store"
 )
 
 // isNetworkError returns true for errors caused by network connectivity issues
@@ -117,7 +117,7 @@ func resolveRead(ctx context.Context, c *client.Client, flags *rootFlags, resour
 		// Network error — try local fallback
 		fallbackData, fallbackProv, fallbackErr := resolveLocal(ctx, resourceType, isList, path, params, "api_unreachable")
 		if fallbackErr != nil {
-			return nil, DataProvenance{}, fmt.Errorf("API unreachable and no local data. Run 'reddit-pp-cli sync' to enable offline access.\n\nOriginal error: %w", err)
+			return nil, DataProvenance{}, fmt.Errorf("API unreachable and no local data. Run 'reddit-cli sync' to enable offline access.\n\nOriginal error: %w", err)
 		}
 		return fallbackData, attachFreshness(fallbackProv, flags), nil
 	}
@@ -151,7 +151,7 @@ func resolvePaginatedRead(ctx context.Context, c *client.Client, flags *rootFlag
 		}
 		fallbackData, fallbackProv, fallbackErr := resolveLocal(ctx, resourceType, true, path, params, "api_unreachable")
 		if fallbackErr != nil {
-			return nil, DataProvenance{}, fmt.Errorf("API unreachable and no local data. Run 'reddit-pp-cli sync' to enable offline access.\n\nOriginal error: %w", err)
+			return nil, DataProvenance{}, fmt.Errorf("API unreachable and no local data. Run 'reddit-cli sync' to enable offline access.\n\nOriginal error: %w", err)
 		}
 		return fallbackData, attachFreshness(fallbackProv, flags), nil
 	}
@@ -161,7 +161,7 @@ func resolvePaginatedRead(ctx context.Context, c *client.Client, flags *rootFlag
 // FTS search covers everything the user has looked up — not just explicit syncs.
 // Best-effort: failures are silently ignored (the live result already succeeded).
 func writeThroughCache(ctx context.Context, resourceType string, data json.RawMessage) {
-	db, err := store.OpenWithContext(ctx, defaultDBPath("reddit-pp-cli"))
+	db, err := store.OpenWithContext(ctx, defaultDBPath("reddit-cli"))
 	if err != nil {
 		return
 	}
@@ -205,12 +205,12 @@ func writeThroughCache(ctx context.Context, resourceType string, data json.RawMe
 // filters (query params, path scoping like /teams/{id}/users) are NOT applied locally.
 // The provenance metadata includes "unscoped":true when params were present but not applied.
 func resolveLocal(ctx context.Context, resourceType string, isList bool, path string, params map[string]string, reason string) (json.RawMessage, DataProvenance, error) {
-	db, err := openStoreForRead(ctx, "reddit-pp-cli")
+	db, err := openStoreForRead(ctx, "reddit-cli")
 	if err != nil {
-		return nil, DataProvenance{}, fmt.Errorf("opening local database: %w\nRun 'reddit-pp-cli sync' first.", err)
+		return nil, DataProvenance{}, fmt.Errorf("opening local database: %w\nRun 'reddit-cli sync' first.", err)
 	}
 	if db == nil {
-		return nil, DataProvenance{}, fmt.Errorf("no local data. Run 'reddit-pp-cli sync' first")
+		return nil, DataProvenance{}, fmt.Errorf("no local data. Run 'reddit-cli sync' first")
 	}
 	defer db.Close()
 
@@ -237,7 +237,7 @@ func resolveLocal(ctx context.Context, resourceType string, isList bool, path st
 			items = append(items, r)
 		}
 		if len(items) == 0 {
-			return nil, DataProvenance{}, fmt.Errorf("no local data for %q. Run 'reddit-pp-cli sync' first", resourceType)
+			return nil, DataProvenance{}, fmt.Errorf("no local data for %q. Run 'reddit-cli sync' first", resourceType)
 		}
 		// Marshal []json.RawMessage into a single JSON array
 		data, err := json.Marshal(items)
@@ -256,7 +256,7 @@ func resolveLocal(ctx context.Context, resourceType string, isList bool, path st
 		return nil, DataProvenance{}, fmt.Errorf("querying local store: %w", err)
 	}
 	if item == nil {
-		return nil, DataProvenance{}, fmt.Errorf("resource %q with ID %q not found in local store. Run 'reddit-pp-cli sync' first", resourceType, id)
+		return nil, DataProvenance{}, fmt.Errorf("resource %q with ID %q not found in local store. Run 'reddit-cli sync' first", resourceType, id)
 	}
 	return item, prov, nil
 }

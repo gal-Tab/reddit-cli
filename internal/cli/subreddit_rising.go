@@ -17,7 +17,7 @@ func newSubredditRisingCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "rising <subreddit>",
 		Short: "Rising listing for a subreddit (Reddit's own rising algorithm — see also `velocity`)",
-		Example: "  reddit-pp-cli subreddit rising example-value",
+		Example: "  reddit-cli subreddit rising example-value",
 		Annotations: map[string]string{"pp:endpoint": "subreddit.rising", "pp:method": "GET", "pp:path": "/r/{subreddit}/rising.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {

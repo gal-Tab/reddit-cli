@@ -20,7 +20,7 @@ func newMultiPromotedCmd(flags *rootFlags) *cobra.Command {
 		Use:   "multi <username> <multiname>",
 		Short: "Read a multireddit feed (combined listing across the multi's subs)",
 		Long:  "Shortcut for 'multi get'. Read a multireddit feed (combined listing across the multi's subs)",
-		Example: "  reddit-pp-cli multi example-resource example-resource",
+		Example: "  reddit-cli multi example-resource example-resource",
 		Annotations: map[string]string{"pp:endpoint": "multi.get", "pp:method": "GET", "pp:path": "/user/{username}/m/{multiname}.json", "mcp:read-only": "true"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			c, err := flags.newClient()
