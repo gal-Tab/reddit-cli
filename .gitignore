@@ -1,0 +1,19 @@
+# Compiled binaries (rebuild via `make build` / `make install`)
+/reddit-pp-cli
+/reddit-pp-mcp
+/bin/
+
+# Local artifacts from the most recent run; not source of truth
+dogfood-results.json
+workflow-verify-report.json
+
+# Go build cache / vendor
+*.test
+*.out
+/vendor/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp

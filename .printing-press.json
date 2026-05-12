@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-05-12T12:00:15.625739Z",
+  "printing_press_version": "4.2.2",
+  "api_name": "reddit",
+  "cli_name": "reddit-pp-cli",
+  "spec_path": "/Users/galta/printing-press/.runstate/cli-printing-press-d780f7e7/runs/20260511-102645/research/reddit-spec.yaml",
+  "run_id": "20260511-102645",
+  "novel_features": [
+    {
+      "name": "Velocity-ranked rising",
+      "command": "velocity",
+      "description": "Re-rank a subreddit's rising listing by upvotes-per-minute computed from local snapshot deltas, not by Reddit's own opaque rising algorithm."
+    },
+    {
+      "name": "Topic velocity across subs",
+      "command": "pulse",
+      "description": "Compare mentions-per-hour of a topic this window vs the prior window across N subreddits, surfacing which communities are heating up on it."
+    },
+    {
+      "name": "Cross-sub topic sweep",
+      "command": "sweep",
+      "description": "Top posts mentioning a topic across N subreddits in a window, deduplicated via the local crosspost-edges table so the same viral post counted once."
+    },
+    {
+      "name": "User activity rollup",
+      "command": "user activity",
+      "description": "All posts and comments by a user in a window, grouped by subreddit with karma sums, post counts, and first/last activity timestamps per sub."
+    },
+    {
+      "name": "Crosspost cascade graph",
+      "command": "cascade",
+      "description": "Recursive walk of a post's crosspost graph rendered as a tree (or `--graph` DOT) showing every downstream crosspost with its subreddit, score, and age."
+    },
+    {
+      "name": "Controversy-ratio finder",
+      "command": "controversial-now",
+      "description": "Posts in a subreddit window where comment-count divided by score is unusually high — the 'fight in the parking lot' signal that Reddit's own controversial sort fails to surface in the recent window."
+    },
+    {
+      "name": "Watchlist with delta refresh",
+      "command": "watchlist",
+      "description": "A named bag of subreddits and users; one command refreshes them all and the diff sub-command reports what's new and what's rising since the last sync, grouped by entry."
+    }
+  ]
+}
